@@ -43,17 +43,17 @@ app.post("/nuevoalumno", async (req, res) => {
 // Ruta para actualizar un alumno
 app.put("/actualizaralumno/:matricula", async (req, res) => {
     const { matricula } = req.params; // Obtener la matrícula de los parámetros de la URL
-    const { nombre } = req.body; // Obtener el nuevo nombre del cuerpo de la solicitud
+    const { nombre, apellido, correo, contrasena } = req.body; // Obtener el nuevo nombre del cuerpo de la solicitud
 
-    if (!nombre) {
-        return res.status(400).json({ error: "El campo nombre es requerido" });
+    if (!nombre || !apellido || !correo || !contrasena) {
+        return res.status(400).json({ error: "Todos los campos son requeridos" });
     }
 
     try {
         // Realizar la actualización en la base de datos
         const [result] = await pool.query(
-            "UPDATE alumnos SET nombre = ? WHERE matricula = ?", //se sustituye la matricula por el alumno deseado
-            [nombre, matricula]
+            "UPDATE alumnos SET nombre = ?, apellido = ?, correo = ?, contrasena = ? WHERE matricula = ?",
+            [nombre, apellido, correo, contrasena, matricula]
         );
 
         // Verificar si se actualizó algún registro

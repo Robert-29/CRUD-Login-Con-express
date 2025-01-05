@@ -13,7 +13,7 @@ const CrearAlumno = () => {
 
     // Validar que los campos no estén vacíos
     if (!nombre || !matricula) {
-      setMensaje("Los campos nombre y matrícula son requeridos");
+      setMensaje("Todos los campos son requeridos");
       return;
     }
 
@@ -29,12 +29,13 @@ const CrearAlumno = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMensaje(`Alumno ${data.nombre} ${data.matricula} con matricula ${data.matricula} creado exitosamente`);
+        setMensaje(`Alumno ${data.nombre} ${data.apellido} con matricula ${data.matricula} creado exitosamente`);
         setMatricula(""); // Limpia los imput para que no tengas que borrarlo manualmente
         setNombre(""); 
         setApellido("");
         setCorreo("");
         setContrasena("");
+        window.location.reload(); {/* Recargar la página para ver los cambios */}
       } else {
         setMensaje(data.error || "Hubo un error al crear el alumno");
       }
@@ -46,8 +47,8 @@ const CrearAlumno = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-semibold text-center mb-4">Crear Nuevo Alumno</h2>
-      {mensaje && <p className="text-center text-red-500 mb-4">{mensaje}</p>}
+      <h2 className="text-2xl font-semibold text-center mb-4">Registrar Nuevo Alumno</h2>
+      {mensaje && <p className="text-center text-blue-950 mb-4">{mensaje}</p>}
       <form onSubmit={handleSubmit} className="space-y-4 max-w-lg mx-auto ">
         <section className="flex space-x-4" >
             <div className="w-full" >
@@ -116,7 +117,7 @@ const CrearAlumno = () => {
           type="submit"
           className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
         >
-          Crear Alumno
+          Registrar Alumno
         </button>
       </form>
     </div>
