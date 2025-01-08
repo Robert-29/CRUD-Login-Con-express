@@ -25,7 +25,6 @@ const ActualizarAlumno = ({ iniciarPopup, cancelarPopup, alumnoCompleto }) => {
 
     // Crear el objeto con los datos del formulario
     const alumno = {
-      matricula,
       nombre,
       apellido,
       correo,
@@ -133,7 +132,6 @@ ActualizarAlumno.propTypes = {
   iniciarPopup: PropTypes.bool.isRequired,
   cancelarPopup: PropTypes.func.isRequired,
   alumnoCompleto: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 export default ActualizarAlumno;
